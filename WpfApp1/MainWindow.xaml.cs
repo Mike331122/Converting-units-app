@@ -25,6 +25,7 @@ namespace WpfApp1
 
     public partial class MainWindow : Window
     {
+        // 3 tables that the program will use to show units
         public string[] Time = { "Time", "s", "min", "h", "d" };
         public string[] Weight = { "Weight", "g", "dg", "kg", "t" };
         public string[] Length = { "Length", "mm", "cm", "m", "km" };
@@ -32,17 +33,14 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-        }
 
-        private void ButtonAddName_Click(object sender, RoutedEventArgs e)
-        {
-           /* if (!string.IsNullOrWhiteSpace(txtName.Text) && !ListUnits.Items.Contains(txtName.Text))
-            {
-                ListUnits.Items.Add(txtName.Text);
-                txtName.Clear();
-            }*/
+            Adding("Time");
         }
-
+        /// <summary>
+        /// Function that is choosing which Type of data the user wants to look at
+        /// </summary>
+        /// <param name="tabName">Name of the table user wants to be shown</param>
+        /// <returns>Table that will be showing units</returns>
         public string[] Choose(string tabName)
         {
             if (tabName == Time[0])
@@ -59,6 +57,10 @@ namespace WpfApp1
             }
         }
 
+        /// <summary>
+        /// Function that based on the user choosing, will list every unit available for converting
+        /// </summary>
+        /// <param name="tabName">Name of the table user wants to be shown</param>
         public void Adding(string tabName)
         {
             ListUnits.Items.Clear();
@@ -71,34 +73,35 @@ namespace WpfApp1
             }
         }
 
+        /// <summary>
+        /// Reduces name and it won't show System... anymore
+        /// </summary>
+        /// <param name="name">String that need to be shorted</param>
+        /// <returns>New string with the name f the table that user wanna look at</returns>
         public string Deleting(string name)
         { 
             return name.Substring(37);
         }
 
-        private void SelectUnits(object sender, SelectionChangedEventArgs e)
-        {
-            string curUnit = ListUnits.SelectedItem.ToString();
-            //string curType = ListTypes.SelectedItem.ToString();
-
-            ListUnits.Items.RemoveAt(1);
-            ListUnits.Items.Refresh();
-            
-
-            string number = ListUnits.Items.Count.ToString();
-            //int numb = Convert.ToInt32(number);
-            Convertnumber.Text = curUnit;
-            Convertednumber.Text = number;
-        }
-
         private void SelectType(object sender, SelectionChangedEventArgs e)
         {
-            //Adding(ListTypes.);
-            string curUnit = ListTypes.SelectedItem.ToString();
-            string unit = Deleting(curUnit);
+          
+            string unit = Deleting(ListTypes.SelectedItem.ToString());
             Adding(unit);
             
-            Convertnumber.Text = unit;
+
+        }
+
+        private void SelectUnits(object sender, SelectionChangedEventArgs e)
+        {
+ 
+        }
+
+        private void Convert(object sender, TextChangedEventArgs e)
+        {
+            string napis = "klaa";
+            Convertednumber.Text = napis;
+            //MessageBox.Show("Zmieniasz coś");
         }
     }
 }

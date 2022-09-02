@@ -28,15 +28,13 @@
             </ListBox>
 
             <Label FontWeight="Bold" FontStyle="Normal" FontSize="14" >Units</Label>
-            <ListBox Grid.Row="0" SelectionMode="Single" x:Name="ListUnits" SelectionChanged="SelectUnits" >
-           
-            </ListBox>
+            <ListBox Grid.Row="0" SelectionMode="Single" x:Name="ListUnits" SelectionChanged="SelectUnits" />
         </StackPanel>
 
 
         <StackPanel Grid.Row="0" Grid.Column="1" Margin="5,0,0,0">
-            <TextBox x:Name="Convertnumber" />
-            <TextBox x:Name="Convertednumber" />
+            <TextBox x:Name="Convertnumber" TextAlignment="Right" TextChanged="Convert" />
+            <TextBox x:Name="Convertednumber" TextAlignment="Right" />
         </StackPanel>
 
     </Grid>
