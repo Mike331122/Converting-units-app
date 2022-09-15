@@ -27,15 +27,19 @@
                 <ListBoxItem>Length</ListBoxItem>
             </ListBox>
 
-            <Label FontWeight="Bold" FontStyle="Normal" FontSize="14" >Units</Label>
+            <Label FontWeight="Bold" FontStyle="Normal" FontSize="14" >Choose Unit</Label>
             <ListBox Grid.Row="0" SelectionMode="Single" x:Name="ListUnits" SelectionChanged="SelectUnits" />
+
+            <Label FontWeight="Bold" FontStyle="Normal" FontSize="14" >Unit to Convert</Label>
+            <ListBox Grid.Row="0" SelectionMode="Single" x:Name="ListUnitsWithoutOne" />
         </StackPanel>
 
 
         <StackPanel Grid.Row="0" Grid.Column="1" Margin="5,0,0,0">
-            <TextBox x:Name="Convertnumber" TextAlignment="Right" TextChanged="Convert" />
-            <TextBox x:Name="Convertednumber" TextAlignment="Right" />
+            <TextBox x:Name="Convertnumber" TextAlignment="Right" TextChanged="Convert" IsEnabled="False" />
+            <TextBox x:Name="Convertednumber" TextAlignment="Right" IsEnabled="False" />
         </StackPanel>
+        
 
     </Grid>
 

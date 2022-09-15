@@ -29,12 +29,13 @@ namespace WpfApp1
         public string[] Time = { "Time", "s", "min", "h", "d" };
         public string[] Weight = { "Weight", "g", "dg", "kg", "t" };
         public string[] Length = { "Length", "mm", "cm", "m", "km" };
+        public string actualTypeName;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Adding("Time");
+            Replacement("Time");
         }
         /// <summary>
         /// Function that is choosing which Type of data the user wants to look at
@@ -43,6 +44,7 @@ namespace WpfApp1
         /// <returns>Table that will be showing units</returns>
         public string[] Choose(string tabName)
         {
+            actualTypeName = tabName;
             if (tabName == Time[0])
             {
                 return Time;
@@ -61,16 +63,44 @@ namespace WpfApp1
         /// Function that based on the user choosing, will list every unit available for converting
         /// </summary>
         /// <param name="tabName">Name of the table user wants to be shown</param>
-        public void Adding(string tabName)
+        public void Replacement(string tabName,int numb = 1)
         {
-            ListUnits.Items.Clear();
+            
 
             string[] tab = Choose(tabName);
-           
-            for (int i = 1; i < tab.Length; i++)
+
+            switch (numb)
             {
-                ListUnits.Items.Add(tab[i]);
+                case 1:
+
+                    ListUnits.Items.Clear();
+                    ListUnitsWithoutOne.Items.Clear();
+
+                    for (int i = 1; i < tab.Length; i++)
+                    {
+                        ListUnits.Items.Add(tab[i]);
+                        ListUnitsWithoutOne.Items.Add(tab[i]);
+                    }
+                    break;
+
+                case 2:
+
+                    ListUnitsWithoutOne.Items.Clear();
+
+                    for (int i = 1; i < tab.Length; i++)
+                    {
+                        
+                        ListUnitsWithoutOne.Items.Add(tab[i]);
+                    }
+                    break;
             }
+        }
+
+        public void Sasd()
+        {
+            ListUnitsWithoutOne.Items.RemoveAt(ListUnits.Items.IndexOf(ListUnits.SelectedItem));
+
+            
         }
 
         /// <summary>
@@ -85,16 +115,24 @@ namespace WpfApp1
 
         private void SelectType(object sender, SelectionChangedEventArgs e)
         {
-          
-            string unit = Deleting(ListTypes.SelectedItem.ToString());
-            Adding(unit);
-            
+            Replacement(actualTypeName, 2);
 
+            string unit = Deleting(ListTypes.SelectedItem.ToString());
+            Replacement(unit);
+
+            Convertnumber.IsEnabled = false;
+            ListTypes.UnselectAll();
         }
 
         private void SelectUnits(object sender, SelectionChangedEventArgs e)
         {
- 
+            
+            Replacement(actualTypeName, 2);
+
+            Convertnumber.IsEnabled = true;
+
+            Sasd();
+            ListUnits.UnselectAll();
         }
 
         private void Convert(object sender, TextChangedEventArgs e)
